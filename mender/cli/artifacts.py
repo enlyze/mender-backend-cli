@@ -27,7 +27,7 @@ from collections import OrderedDict
 
 from requests_toolbelt import MultipartEncoder
 
-from mender.cli.utils import run_command, do_simple_get, api_from_opts, errorprinter
+from mender.cli.utils import run_command, do_simple_get, api_from_opts, errorprinter, do_simple_delete
 from mender.client import artifacts_url
 
 
@@ -65,7 +65,7 @@ def do_main(opts):
         'list': do_artifacts_list,
         'add': do_artifacts_artifact_add,
         'show': do_artifacts_show,
-        'remove': None,
+        'remove': do_artifacts_remove,
         'download': do_artifacts_download,
     }
     run_command(opts.artcommand, cmds, opts)
@@ -127,6 +127,13 @@ def do_artifacts_show(opts):
     url = artifacts_url(opts.service, opts.id)
     with api_from_opts(opts) as api:
         do_simple_get(api, url)
+
+
+def do_artifacts_remove(opts):
+    logging.debug('delete artifact %s download', opts.id)
+    url = artifacts_url(opts.service, opts.id)
+    with api_from_opts(opts) as api:
+        do_simple_delete(api, url)
 
 
 def do_artifacts_list(opts):
