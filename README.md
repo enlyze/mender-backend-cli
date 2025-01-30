@@ -6,7 +6,7 @@ Dependencies:
 - Python 3
 - requests
 - requests-toolbelt
-- pycrypto
+- pycryptodome
 - clint (optional)
 
 ## Tools

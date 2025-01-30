@@ -27,7 +27,7 @@ VERSION = '0.1'
 install_requires = [
     'requests',
     'requests-toolbelt',
-    'pycrypto',
+    'pycryptodome',
     'clint',
 ]
 
